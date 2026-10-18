@@ -3,6 +3,8 @@
 Неблокирующая библиотека-индикатор состояния для одного RGB-светодиода с общим катодом.
 Режимы: постоянный цвет (`NOT_BLINK`), мигание (`BLINK`) и радуга (`RAINBOW`).
 
+![Rainbow animation](extras/rainbow.gif)
+
 ## Установка
 
 Arduino IDE → Sketch → Include Library → Add .ZIP Library → выбрать архив.
