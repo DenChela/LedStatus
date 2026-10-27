@@ -88,8 +88,6 @@ void LedStatus::handle() {
             default:
                 positionRainbow = 1;
         }
-        Serial.printf_P(PSTR("Цвет радуги: красный - %u, зелёный - %u, синий - %u      \r"), position[0], position[1], position[2]);
-    }
 }
 
 void LedStatus::setMode(const uint8_t mode, const uint8_t color[3]) {
