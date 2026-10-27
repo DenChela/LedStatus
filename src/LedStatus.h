@@ -6,19 +6,21 @@ namespace DenChela {
     class LedStatus {
 
         public:
-            enum {
+            enum Mode:byte{
                 NOT_BLINK = 0,
                 BLINK = 1,
                 RAINBOW = 2
             };
-            LedStatus(const uint8_t _red, const uint8_t green, const uint8_t blue);
+            LedStatus(const uint8_t _red, const uint8_t _green, const uint8_t _blue);
             ~LedStatus();
             //Постоянный мониторинг и события
             void handle();
             //Выбор режима и цвета
-            void setMode(const uint8_t mode, const uint8_t color[3]);
+            void setMode(Mode mode, const uint8_t color[3]);
             //Выбор режима без цвета (используется чёрный)
-            void setMode(const uint8_t mode);
+            void setMode(Mode mode);
+            //Выбор режима и цвета (чтение цвета из флеш памяти).
+            void setMode_P(Mode mode, const uint8_t color[3]);
             //Установка полупериода мигания светодиода, мс
             void setTimePeriodBlink(const uint16_t timePeriod);
             //Установка периода изменения цвета радуги, мс

@@ -3,7 +3,8 @@
   Светодиод мигает красным каждые 600 мс.
 
   Подключение (общий катод): R -> пин красного, G -> пин зелёного,
-  B -> пин синего, общий катод -> GND. Резисторы 330–470 Ом на каждый канал.
+  B -> пин синего, общий катод -> GND или общий анод -> VCC.
+  Резисторы 330–470 Ом на каждый канал.
 
   На AVR (Uno/Nano) берите PWM-пины: 3, 5, 9, 10, 11 (пин 6 использует
   Timer0 вместе с millis() — возможен лёгкий джиттер ШИМ).
@@ -13,9 +14,9 @@
 
 using namespace DenChela;
 
-const uint8_t PIN_RED = 9;
-const uint8_t PIN_GREEN = 10;
-const uint8_t PIN_BLUE = 11;
+#define PIN_RED 9
+#define PIN_GREEN 10
+#define PIN_BLUE 11
 
 LedStatus led(PIN_RED, PIN_GREEN, PIN_BLUE);
 

@@ -88,23 +88,31 @@ void LedStatus::handle() {
             default:
                 positionRainbow = 1;
         }
+    }
 }
 
-void LedStatus::setMode(const uint8_t mode, const uint8_t color[3]) {
+void LedStatus::setMode(Mode mode, const uint8_t color[3]) {
     thisStatus = mode;
     for (uint8_t i = 0; i < 3; i++) ledRGB[i] = color[i];
-    if (mode == NOT_BLINK || mode == BLINK) setColor(color);
-    else {
+    if (mode == NOT_BLINK || mode == BLINK) setColor(ledRGB);
+    else if (mode == RAINBOW) {
         positionRainbow = 1;
-        const uint8_t color[] = {255, 0, 0};
-        setColor(color);
+        const uint8_t col[] = {255, 0, 0};
+        setColor(col);
     }
     time = millis();
 }
 
-void LedStatus::setMode(const uint8_t mode) {
-    const uint8_t color[] = {0, 0, 0};
-    setMode(mode, color);
+void LedStatus::setMode(Mode mode) {
+    uint8_t col[3];
+    if (mode == RAINBOW) for (uint8_t i = 0; i < 3; i++) col[i] = 0;
+    else for (uint8_t i = 0; i < 3; i++) col[i] = 255;
+    setMode(mode, col);
+}
+
+void LedStatus::setMode_P(Mode mode, const uint8_t color[3]) {
+    const uint8_t col[3] = {pgm_read_byte(&color[0]), pgm_read_byte(&color[1]), pgm_read_byte(&color[2])};
+    setMode(mode, col);
 }
 
 void LedStatus::setTimePeriodBlink(const uint16_t timePeriod) {
